@@ -1,10 +1,11 @@
 public class Program {
     public static void main(String[] args) {
-//        Point p1 = new Point(2, 5);
-//        Point p2 = new Point(5, 2);
+//        Point p1 = new Point(1, 4);
+//        Point p2 = new Point(3, 8);
 //        Segment1 s = new Segment1(p1, p2);
-//        Segment1 s2 = new Segment1(2, 4, 1, 6);
+//        Segment1 s2 = new Segment1(s);
 //        System.out.println(s2.toString());
+//        System.out.println(s.equals(s2));
 
 
         System.out.println("********** Test Q2 Segment1 - Start **********");
@@ -119,47 +120,47 @@ public class Program {
             System.out.println("\t ERROR - after moveVertical(-6) - expected (5.0,5.0)---(10.0,5.0) ; actual=" + sMid_2);
         } else
             System.out.println("\t OK - after moveVertical (-6) - expected (5.0,5.0)---(10.0,5.0) ; actual=" + sMid_2);
-//*********
+////*********
         System.out.println("Test changeSize:");
-//        s1 = new Segment1(0.0, 0.0, 2.0, 0.0);
-//        s1.changeSize(3.0);
-//        if (s1.getLength() != 5.0 ) {
-//            System.out.println("\t ERROR - s1.changeSize() - expected length 5.0 ; actual=" + s1.getLength());
-//        } else
-//            System.out.println("\t OK - s1.getLength() - expected length 5.0 ; actual=" + s1.getLength());
-//        System.out.println("Test pointOnSegment:");
-//        Point p = new Point (1.0, 0.0);
-//
-//        if (!s1.pointOnSegment(p)) {
-//            System.out.println("\t ERROR - s1.pointOnSegment(p) - expected true ; actual=" + s1.pointOnSegment(p));
-//        } else
-//            System.out.println("\t OK - s1.pointOnSegment(p) - expected true ; actual=" + s1.pointOnSegment(p));
-//        System.out.println("Test isBigger:");
-//        s1 = new Segment1(0.0, 0.0, 2.0, 0.0);
-//        Segment1 s2 = new Segment1(0.0, 2.0, 4.0, 2.0);
-//
-//        if (! s2.isBigger(s1)) {
-//            System.out.println("\t ERROR - s2.isBigger(s1) - expected true ; actual=" + s2.isBigger(s1));
-//        } else
-//            System.out.println("\t OK - s2.isBigger(s1) - expected true ; actual=" + s2.isBigger(s1));
-//
-//        System.out.println("Test overlap:");
-//
-//        if (sMid.overlap(sMid) != 5.0) {
-//            System.out.println("\t ERROR - sMid.overlap(sMid) - expected 5.0 ; actual=" + sMid.overlap(sMid) + " sMid=" + sMid + " sMid=" + sMid);
-//        } else
-//            System.out.println("\t OK - sMid.overlap(sMid) - expected 5.0 ; actual=" + sMid.overlap(sMid) + " sMid=" + sMid + " sMid=" + sMid);
-//
-//        System.out.println("Test trapezePerimeter:");
-//
-//        Segment1 sTr1 = new Segment1(2.0, 4.0, 13.0, 4.0);
-//        Segment1 sTr2 = new Segment1(5.0, 0.0, 10.0, 0.0);
-//
-//        if (sTr1.trapezePerimeter(sTr2) != 26.0) {
-//            System.out.println("\t ERROR - sTr1.trapezePerimeter(sTr2) - expected 26.0 ; actual=" + sTr1.trapezePerimeter(sTr2) + " sTr1=" + sTr1 + " sTr2=" + sTr2);
-//        } else
-//            System.out.println("\t OK - sTr1.trapezePerimeter(sTr2) - expected 26.0 ; actual=" + sTr1.trapezePerimeter(sTr2) + " sTr1=" + sTr1 + " sTr2=" + sTr2);
-//
-//        System.out.println("********** Test Q2 Segment1 - Finish **********\n");
+        s1 = new Segment1(0.0, 0.0, 2.0, 0.0);
+        s1.changeSize(3.0);
+        if (s1.getLength() != 5.0 ) {
+            System.out.println("\t ERROR - s1.changeSize() - expected length 5.0 ; actual=" + s1.getLength());
+        } else
+            System.out.println("\t OK - s1.getLength() - expected length 5.0 ; actual=" + s1.getLength());
+        System.out.println("Test pointOnSegment:");
+        Point p = new Point (1.0, 0.0);
+
+        if (!s1.pointOnSegment(p)) {
+            System.out.println("\t ERROR - s1.pointOnSegment(p) - expected true ; actual=" + s1.pointOnSegment(p));
+        } else
+            System.out.println("\t OK - s1.pointOnSegment(p) - expected true ; actual=" + s1.pointOnSegment(p));
+        System.out.println("Test isBigger:");
+        s1 = new Segment1(0.0, 0.0, 2.0, 0.0);
+        Segment1 s2 = new Segment1(0.0, 2.0, 4.0, 2.0);
+
+        if (! s2.isBigger(s1)) {
+            System.out.println("\t ERROR - s2.isBigger(s1) - expected true ; actual=" + s2.isBigger(s1));
+        } else
+            System.out.println("\t OK - s2.isBigger(s1) - expected true ; actual=" + s2.isBigger(s1));
+
+        System.out.println("Test overlap:");
+
+        if (sMid.overlap(sMid) != 5.0) {
+            System.out.println("\t ERROR - sMid.overlap(sMid) - expected 5.0 ; actual=" + sMid.overlap(sMid) + " sMid=" + sMid + " sMid=" + sMid);
+        } else
+            System.out.println("\t OK - sMid.overlap(sMid) - expected 5.0 ; actual=" + sMid.overlap(sMid) + " sMid=" + sMid + " sMid=" + sMid);
+
+        System.out.println("Test trapezePerimeter:");
+
+        Segment1 sTr1 = new Segment1(2.0, 4.0, 13.0, 4.0);
+        Segment1 sTr2 = new Segment1(5.0, 0.0, 10.0, 0.0);
+
+        if (sTr1.trapezePerimeter(sTr2) != 26.0) {
+            System.out.println("\t ERROR - sTr1.trapezePerimeter(sTr2) - expected 26.0 ; actual=" + sTr1.trapezePerimeter(sTr2) + " sTr1=" + sTr1 + " sTr2=" + sTr2);
+        } else
+            System.out.println("\t OK - sTr1.trapezePerimeter(sTr2) - expected 26.0 ; actual=" + sTr1.trapezePerimeter(sTr2) + " sTr1=" + sTr1 + " sTr2=" + sTr2);
+
+        System.out.println("********** Test Q2 Segment1 - Finish **********\n");
     }
 }
