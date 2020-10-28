@@ -9,6 +9,7 @@ public class Point {
     private final double RADIAN_FACTOR = 180;
     private final double ROUND_FACTOR = 10000.0;
 
+
     //CONSTRUCTORS//
     public Point(double x, double y) {
         if (x <= DEFAULT_VAL) {
@@ -23,9 +24,12 @@ public class Point {
         ////////////////////////////
     }
 
+
     public Point(Point other) {
-        this._alpha = other._alpha;
-        this._radius = other._radius;
+        if(other != null){
+            this._alpha = other._alpha;
+            this._radius = other._radius;
+        }
     }
 
     //CALCULATE RADIUS//
@@ -57,10 +61,12 @@ public class Point {
         return this._xToRadian(this._radius, this._alpha);
     }
 
+
     public double getY() {
         return this._yToRadian(this._radius, this._alpha);
     }
     //////////////////////////////////////////////////////
+
 
     //SETTERS//
     public void setX(double num) {
@@ -99,7 +105,7 @@ public class Point {
     }
 
     public boolean isUnder(Point other) {
-        return !isAbove(other);
+        return other.isAbove(this);
     }
 
     public boolean isLeft(Point other) {
@@ -107,7 +113,7 @@ public class Point {
     }
 
     public boolean isRight(Point other) {
-        return !isLeft(other);
+        return other.isLeft(this);
     }
 
     public double distance(Point p) {
