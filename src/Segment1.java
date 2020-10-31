@@ -1,11 +1,28 @@
+/**
+ * Segment1 represents a line (parallel to the x-axis) using two Points.
+ *
+ * @author Dor Samoha
+ * @version Oct 29th 2020
+ */
+
 public class Segment1 {
+
+    ///DECLARING VARIABLES///
     private Point _poLeft;
     private Point _poRight;
 
     final int ZERO = 0;
     final double POWER_OF_TWO = 2;
+    ////////////////////////
 
-    //CONSTRUCTORS///
+    ///CONSTRUCTORS///////////////////////
+
+    /**
+     * Constructs a new segment using two Points. If the y coordinates are different, change the y of the right point to be equal to the y of the left point.
+     *
+     * @param left  the left point of the segment
+     * @param right the right point of the segment
+     */
     public Segment1(Point left, Point right) {
         if (right.getY() != left.getY()) {
             right.setY(left.getY());
@@ -14,66 +31,135 @@ public class Segment1 {
         this._poRight = right;
     }
 
+    /**
+     * Constructs a new segment using 4 specified x y coordinates: Two coordinates for the left point and two coordinates for the right point. If the y coordinates are different, change the y of the right point to be equal to the y of the left point.
+     *
+     * @param leftX  X value of the left point
+     * @param leftY  Y value of the left point
+     * @param rightX X value of the right point
+     * @param rightY Y value of the right point
+     */
     public Segment1(double leftX, double leftY, double rightX, double rightY) {
         if (rightY != leftY) {
-            //            System.out.println("Can't assign right Y value - value is changed to " + leftY);
             rightY = leftY;
         }
-
         this._poLeft = new Point(leftX, leftY);
         this._poRight = new Point(rightX, rightY);
     }
 
+    /**
+     * Copy Constructor. Construct a segment using a reference segment.
+     *
+     * @param other the reference segment
+     */
     public Segment1(Segment1 other) {
-        if(other != null){
+        if (other != null) {
             this._poLeft = other._poLeft;
             this._poRight = other._poRight;
         }
     }
+    ////////////////////////////////////////////////////////////////
 
-    //GETTERS//
-    Point getPoLeft() {
+    ///GETTERS/////////////////////////////////////////////////////
+
+    /**
+     * Returns the left point of the segment
+     *
+     * @return the left point
+     */
+
+    public Point getPoLeft() {
         return this._poLeft;
     }
 
-    Point getPoRight() {
+    /**
+     * Return the right point of the segment
+     *
+     * @return the right point
+     */
+    public Point getPoRight() {
         return this._poRight;
     }
 
-    double getLength() {
-        return Math.abs(this._poRight.getX() - this._poLeft.getX());
-    }
+    /////////////////////////////////////////////////////////////////
 
-    ///TO STRING METHOD///
+    ///TO STRING METHOD///////////////////////////
     public String toString() {
         return "(" + this._poLeft.getX() + "," + this._poLeft.getY() + ")---(" + this._poRight.getX() + "," + this._poRight.getY() + ")";
     }
+    //////////////////////////////////////////////
 
-    ///METHODS///
-    boolean equals(Segment1 other) {
+    ///METHODS///////////////////////////////////
+
+    /**
+     * Check if the reference segment is equal to this segment.
+     *
+     * @param other the other Segment
+     * @return true if both segments are equal
+     */
+
+    public boolean equals(Segment1 other) {
         if (this._poLeft.getX() == other._poLeft.getX() && this._poLeft.getY() == other._poLeft.getY()) {
             return this._poRight.getX() == other._poRight.getX() && this._poRight.getY() == other._poRight.getY();
         }
         return false;
     }
 
-    boolean isAbove(Segment1 other) {
+    /**
+     * Return the segment's length
+     *
+     * @return the length of segment
+     */
+    public double getLength() {
+        return Math.abs(this._poRight.getX() - this._poLeft.getX());
+    }
+
+    /**
+     * Check if this segment is above a reference segment.
+     *
+     * @param other the other segment
+     * @return True if this segment is above the other segment
+     */
+    public boolean isAbove(Segment1 other) {
         return this._poLeft.getY() > other._poLeft.getY();
     }
 
-    boolean isUnder(Segment1 other) {
+    /**
+     * Check if this segment is under a reference segment.
+     *
+     * @param other the other segment
+     * @return True if this segment is under the other segment
+     */
+    public boolean isUnder(Segment1 other) {
         return other.isAbove(this);
     }
 
-    boolean isLeft(Segment1 other) {
+    /**
+     * Check if this segment is left of a received segment.
+     *
+     * @param other the other segment
+     * @return True if this segment is left to the reference segment
+     */
+    public boolean isLeft(Segment1 other) {
         return this._poRight.getY() < other._poLeft.getX();
     }
 
-    boolean isRight(Segment1 other) {
+    /**
+     * Check if this segment is right of a received segment.
+     *
+     * @param other the other segment
+     * @return True if this segment is right to the reference segment
+     */
+    public boolean isRight(Segment1 other) {
         return other.isLeft(this);
     }
 
-    void moveHorizontal(double delta) {
+    /**
+     * Move the segment horizontally by delta.
+     *
+     * @param delta the displacement size
+     */
+    public void moveHorizontal(double delta) {
         double leftX = this._poLeft.getX();
         double rightX = this._poRight.getX();
 
@@ -83,6 +169,11 @@ public class Segment1 {
         }
     }
 
+    /**
+     * Move the segment vertically by delta.
+     *
+     * @param delta the displacement size
+     */
     void moveVertical(double delta) {
         double leftY = this._poLeft.getY();
         double rightY = this._poRight.getY();
@@ -92,7 +183,12 @@ public class Segment1 {
         this._poRight.setY(rightY + delta);
     }
 
-    void changeSize(double delta) {
+    /**
+     * Change the segment size by moving the right point by delta. Will be implemented only for a valid delta: only if the new right point remains the right point.
+     *
+     * @param delta the length change
+     */
+    public void changeSize(double delta) {
         double rightX = this._poRight.getX();
 
         if (rightX > this._poLeft.getX()) {
@@ -100,7 +196,13 @@ public class Segment1 {
         }
     }
 
-    boolean pointOnSegment(Point p) {
+    /**
+     * Check if a point is located on the segment.
+     *
+     * @param p a point to be checked
+     * @return True if p is on this segment
+     */
+    public boolean pointOnSegment(Point p) {
         double pointX = p.getX();
         double pointY = p.getY();
 
@@ -110,18 +212,36 @@ public class Segment1 {
         return false;
     }
 
+    /**
+     * Check if this segment is bigger than a reference segment.
+     *
+     * @param other the reference segment
+     * @return True if this segment is bigger than the reference segment
+     */
     public boolean isBigger(Segment1 other) {
         return this.getLength() > other.getLength();
     }
 
+    /**
+     * Returns the overlap size of this segment and a reference segment.
+     *
+     * @param other the reference segment
+     * @return The overlap size
+     */
     public double overlap(Segment1 other) {
-        if(other._poRight.getX() > this._poLeft.getX()){
+        if (other._poRight.getX() > this._poLeft.getX()) {
             return other._poRight.getX() - this._poLeft.getX();
         } else {
             return this.getPoRight().getX() - other.getPoLeft().getX();
         }
     }
 
+    /**
+     * Compute the trapeze perimeter, which is constructed by this segment and a reference segment.
+     *
+     * @param other the reference segment
+     * @return The trapeze perimeter
+     */
     public double trapezePerimeter(Segment1 other) {
         double segmentLength1 = this.getLength();
         double segmentLength2 = other.getLength();
@@ -139,7 +259,6 @@ public class Segment1 {
 
         ///RETURN SUM OF ALL SIDES///
         return (segmentLength1 + segmentLength2 + c1 + c2);
-
-
     }
+    //////////////////////////////////////////////////////////////////
 }
