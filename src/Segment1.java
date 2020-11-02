@@ -24,11 +24,11 @@ public class Segment1 {
      * @param right the right point of the segment
      */
     public Segment1(Point left, Point right) {
-        if (right.getY() != left.getY()) {
+        if(left.getY() != right.getY()){
             right.setY(left.getY());
         }
-        this._poLeft = left;
-        this._poRight = right;
+        this._poLeft = new Point(left);
+        this._poRight = new Point(right);
     }
 
     /**
@@ -54,8 +54,8 @@ public class Segment1 {
      */
     public Segment1(Segment1 other) {
         if (other != null) {
-            this._poLeft = other._poLeft;
-            this._poRight = other._poRight;
+            this._poLeft = new Point(other._poLeft);
+            this._poRight = new Point(other._poRight);
         }
     }
     ////////////////////////////////////////////////////////////////
@@ -99,10 +99,8 @@ public class Segment1 {
      */
 
     public boolean equals(Segment1 other) {
-        if (this._poLeft.getX() == other._poLeft.getX() && this._poLeft.getY() == other._poLeft.getY()) {
-            return this._poRight.getX() == other._poRight.getX() && this._poRight.getY() == other._poRight.getY();
-        }
-        return false;
+        return this._poLeft.equals(other._poLeft) && this._poRight.equals(other._poRight);
+
     }
 
     /**

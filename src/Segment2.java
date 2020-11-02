@@ -21,10 +21,6 @@ public class Segment2 {
      * @param right the right point on the segment
      */
     public Segment2(Point left, Point right) {
-        if (left.getY() != right.getY()) {
-            right.setY(left.getY());
-        }
-
         this._length = getSegmentLength(left.getX(), right.getX());
         this._poCenter = new Point(right.getX() - (this._length / POWER_OF_TWO), left.getY());
     }
@@ -67,6 +63,8 @@ public class Segment2 {
 
         if (length > ZERO) {
             this._length = length;
+        } else {
+            this._length = ZERO;
         }
     }
     ////////////////////////////////////////////////////////////
@@ -113,10 +111,7 @@ public class Segment2 {
      * @return True if the reference segment is equal to this segment
      */
     public boolean equals(Segment2 other) {
-        if (this._poCenter.getX() == other._poCenter.getX() && this._poCenter.getY() == other._poCenter.getY()) {
-            return this._length == other._length;
-        }
-        return false;
+        return this._poCenter.equals(other._poCenter) && this._length == other._length;
     }
 
     /**
@@ -247,7 +242,7 @@ public class Segment2 {
     }
 
     /**
-     * Compute the trapeze perimeter, which constructed by this segment and a reference segment.
+     * Compute the trapeze perimeter,  which constructed by this segment and a reference segment.
      *
      * @param other the other segment
      * @return The trapeze perimeter
