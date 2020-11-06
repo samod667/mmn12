@@ -145,7 +145,7 @@ public class Segment1 {
     /**
      * Check if this segment is right of a received segment.
      *
-     * @param other the other segment
+//     * @param other the other segment
      * @return True if this segment is right to the reference segment
      */
     public boolean isRight(Segment1 other) {
@@ -228,9 +228,9 @@ public class Segment1 {
      */
     public double overlap(Segment1 other) {
         if(this.getPoLeft().getX() > other._poRight.getX() && this._poLeft.getX() > other._poRight.getX()){
-            return 0;
+            return ZERO;
         } else if(this._poLeft.getX() < other._poLeft.getX() && this._poRight.getX()<other._poLeft.getX()){
-            return 0;
+            return ZERO;
         } else{
             if(this._poRight.getX() > other._poRight.getX()){
                 return other._poRight.getX() - this._poLeft.getX();

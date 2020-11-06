@@ -237,9 +237,9 @@ public class Segment2 {
      */
     public double overlap(Segment2 other) {
         if(this.getPoLeft().getX() > other.getPoRight().getX() && this.getPoLeft().getX() > other.getPoRight().getX()){
-            return 0;
+            return ZERO;
         } else if(this.getPoLeft().getX() < other.getPoLeft().getX() && this.getPoRight().getX()<other.getPoLeft().getX()){
-            return 0;
+            return ZERO;
         } else{
             if(this.getPoRight().getX() > other.getPoRight().getX()){
                 return other.getPoRight().getX() - this.getPoLeft().getX();
