@@ -25,10 +25,10 @@ public class Point {
      */
 //CONSTRUCTORS//
     public Point(double x, double y) {
-        if (x <= DEFAULT_VAL) {
+        if (x < DEFAULT_VAL) {
             x = DEFAULT_VAL;
         }
-        if (y <= DEFAULT_VAL) {
+        if (y < DEFAULT_VAL) {
             y = DEFAULT_VAL;
         }
         //CALCULATE RADIUS AND ALPHA
@@ -206,6 +206,7 @@ public class Point {
     public void move(double dx, double dy) {
         double x = _xToRadian(this._radius, this._alpha) + dx;
         double y = _yToRadian(this._radius, this._alpha) + dy;
+
 
         if (x >= DEFAULT_VAL && y >= DEFAULT_VAL) {
             this._alpha = this.getAlpha(x, y);

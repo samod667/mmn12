@@ -1,5 +1,7 @@
 /**
  * Segment2 represents a line (parallel to the x-axis) using a center point and length.
+ * @author Dor Samoha
+ * @version Oct 29th 2020
  */
 
 public class Segment2 {
@@ -43,7 +45,7 @@ public class Segment2 {
     }
 
     /**
-     * ICopy Constructor. Construct a segment using a reference segment.
+     * Copy Constructor. Construct a segment using a reference segment.
      *
      * @param other the other segment
      */
@@ -59,7 +61,7 @@ public class Segment2 {
      * @param length the length of segment
      */
     public Segment2(Point point, double length) {
-        this._poCenter = point;
+        this._poCenter = new Point(point);
 
         if (length > ZERO) {
             this._length = length;
@@ -234,10 +236,16 @@ public class Segment2 {
      * @return The overlap size
      */
     public double overlap(Segment2 other) {
-        if (other.getPoRight().getX() > this.getPoLeft().getX()) {
-            return other.getPoRight().getX() - this.getPoLeft().getX();
-        } else {
-            return this.getPoRight().getX() - other.getPoLeft().getX();
+        if(this.getPoLeft().getX() > other.getPoRight().getX() && this.getPoLeft().getX() > other.getPoRight().getX()){
+            return 0;
+        } else if(this.getPoLeft().getX() < other.getPoLeft().getX() && this.getPoRight().getX()<other.getPoLeft().getX()){
+            return 0;
+        } else{
+            if(this.getPoRight().getX() > other.getPoRight().getX()){
+                return other.getPoRight().getX() - this.getPoLeft().getX();
+            } else{
+                return this.getPoRight().getX() - other.getPoLeft().getX();
+            }
         }
     }
 
@@ -251,18 +259,14 @@ public class Segment2 {
         double segment1Length = getLength();
         double segment2Length = other.getLength();
 
-        ///CALCULATING FIRST TRIANGLE INSIDE TRAPEZOID///
-        double a1 = getSegmentLength(this._poCenter.getY(), other._poCenter.getY());
-        double b1 = getSegmentLength(this.getPoLeft().getX(), other.getPoLeft().getX());
-        ///TRAPEZOID SIDE
-        double c1 = Math.sqrt(Math.pow(a1, POWER_OF_TWO) + Math.pow(b1, POWER_OF_TWO));
+        ///CALCULATING TRAPEZE RIGHT SIDE LENGTH
+        double rightSide = Math.sqrt(Math.pow((other.getPoRight().getY() - this.getPoRight().getY()),POWER_OF_TWO) + Math.pow(other.getPoRight().getX() - this.getPoRight().getX(),POWER_OF_TWO));
 
-        ///CALCULATING SECOND TRIANGLE INSIDE TRAPEZOID///
-        double b2 = getSegmentLength(this.getPoRight().getX(), other.getPoRight().getX());
-        double c2 = Math.sqrt(Math.pow(a1, POWER_OF_TWO) + Math.pow(b2, POWER_OF_TWO));
+        ///CALCULATING TRAPEZE LEFT SIDE LENGTH
+        double leftSide = Math.sqrt(Math.pow((other.getPoLeft().getY() - this.getPoLeft().getY()),POWER_OF_TWO) + Math.pow(other.getPoLeft().getX() - this.getPoLeft().getX(),POWER_OF_TWO));
 
         ///RETURN SUM OF ALL SIDES///
-        return (segment1Length + segment2Length + c1 + c2);
+        return segment1Length + segment2Length + rightSide + leftSide;
     }
     /////////////////////////////////////////////////////////////
 

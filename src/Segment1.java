@@ -133,13 +133,13 @@ public class Segment1 {
     }
 
     /**
-     * Check if this segment is left of a received segment.
+     * Check if the entire this segment is left of an other segment.
      *
      * @param other the other segment
      * @return True if this segment is left to the reference segment
      */
     public boolean isLeft(Segment1 other) {
-        return this._poRight.getY() < other._poLeft.getX();
+        return this._poRight.getX() < other._poLeft.getX();
     }
 
     /**
@@ -189,7 +189,7 @@ public class Segment1 {
     public void changeSize(double delta) {
         double rightX = this._poRight.getX();
 
-        if (rightX > this._poLeft.getX()) {
+        if (rightX + delta > this._poLeft.getX()) {
             this._poRight.setX(rightX + delta);
         }
     }
@@ -227,10 +227,16 @@ public class Segment1 {
      * @return The overlap size
      */
     public double overlap(Segment1 other) {
-        if (other._poRight.getX() > this._poLeft.getX()) {
-            return other._poRight.getX() - this._poLeft.getX();
-        } else {
-            return this.getPoRight().getX() - other.getPoLeft().getX();
+        if(this.getPoLeft().getX() > other._poRight.getX() && this._poLeft.getX() > other._poRight.getX()){
+            return 0;
+        } else if(this._poLeft.getX() < other._poLeft.getX() && this._poRight.getX()<other._poLeft.getX()){
+            return 0;
+        } else{
+            if(this._poRight.getX() > other._poRight.getX()){
+                return other._poRight.getX() - this._poLeft.getX();
+            } else{
+                return this._poRight.getX() - other._poLeft.getX();
+            }
         }
     }
 
@@ -244,19 +250,14 @@ public class Segment1 {
         double segmentLength1 = this.getLength();
         double segmentLength2 = other.getLength();
 
-        ///CALCULATING FIRST TRIANGLE INSIDE TRAPEZOID///
-        double a1 = Math.abs(this._poLeft.getY() - other._poLeft.getY());
-        double b1 = Math.abs(this._poLeft.getX() - other._poLeft.getX());
-        ///TRAPEZOID SIDE
-        double c1 = Math.sqrt(Math.pow(a1, POWER_OF_TWO) + Math.pow(b1, POWER_OF_TWO));
+        ///CALCULATE RIGHT SIDE OF TRAPEZE
+        double rightSide = Math.sqrt(Math.pow((other._poRight.getY() - this._poRight.getY()),POWER_OF_TWO) + Math.pow(other._poRight.getX() - this._poRight.getX(),POWER_OF_TWO));
 
-        ///CALCULATING SECOND TRIANGLE INSIDE TRAPEZOID///
-        double b2 = Math.abs(this._poRight.getX() - other._poRight.getX());
-        ///TRAPEZOID SIDE
-        double c2 = Math.sqrt(Math.pow(a1, POWER_OF_TWO) + Math.pow(b2, POWER_OF_TWO));
+        ///CALCULATE LEFT SIDE OF TRAPEZE
+        double leftSide = Math.sqrt(Math.pow((other._poLeft.getY() - this._poLeft.getY()),POWER_OF_TWO) + Math.pow(other._poLeft.getX() - this._poLeft.getX(),POWER_OF_TWO));
 
-        ///RETURN SUM OF ALL SIDES///
-        return (segmentLength1 + segmentLength2 + c1 + c2);
+        ///RETURN SUM
+        return segmentLength1 + segmentLength2 + rightSide + leftSide;
     }
     //////////////////////////////////////////////////////////////////
 }
